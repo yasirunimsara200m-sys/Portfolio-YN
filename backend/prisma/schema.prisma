@@ -1,0 +1,97 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Profile {
+  id                 String   @id @default(uuid())
+  fullName           String
+  title              String
+  bio                String
+  about              String
+  email              String
+  phone              String
+  location           String
+  githubUrl          String?
+  linkedinUrl        String?
+  websiteUrl         String?
+  resumeUrl          String?
+  avatarUrl          String?
+  yearsExperience    String   @default("1+")
+  isAvailableForHire Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}
+
+model Skill {
+  id          String   @id @default(uuid())
+  name        String
+  category    String   // "Frontend", "Backend & Database", "Programming Languages", "Tools & Workflow", "Concepts"
+  proficiency Int      @default(85)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Experience {
+  id           String   @id @default(uuid())
+  role         String
+  company      String
+  period       String
+  isCurrent    Boolean  @default(false)
+  description  String   // JSON string of bullet points array or newline-separated
+  technologies String   @default("") // comma-separated or json string
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(uuid())
+  title       String
+  subtitle    String?
+  description String
+  tags        String   // comma-separated or JSON
+  category    String   @default("Full-Stack")
+  imageUrl    String?
+  demoUrl     String?
+  githubUrl   String?
+  isFeatured  Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id          String   @id @default(uuid())
+  degree      String
+  institution String
+  period      String
+  status      String?
+  details     String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
