@@ -3,18 +3,24 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, Lock, Mail, ArrowRight, ArrowLeft, KeyRound, Sparkles } from 'lucide-react';
+import { ShieldCheck, Lock, Mail, ArrowRight, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { setAuthToken, fetchApi } from '../../../lib/api';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('yasiru01nimsara@gmail.com');
-  const [password, setPassword] = useState('Admin@Yasiru2026');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError('Please enter your email and password');
+      return;
+    }
+
     setLoading(true);
     setError('');
 
@@ -32,13 +38,13 @@ export default function AdminLoginPage() {
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      // Fallback local session if backend is restarting
-      if (email === 'yasiru01nimsara@gmail.com' && password === 'Admin@Yasiru2026') {
+      // Fallback local session if backend is in maintenance
+      if (email === 'yasiru01nimsara@gmail.com' && password === 'Yazi_boy021224') {
         setAuthToken('demo_admin_jwt_session_token');
         router.push('/admin');
         return;
       }
-      setError(err.message || 'Invalid admin credentials');
+      setError(err.message || 'Invalid admin email or password');
     } finally {
       setLoading(false);
     }
@@ -91,7 +97,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white dark:focus:bg-slate-900 text-sm shadow-sm transition-all"
-                  placeholder="admin@portfolio.local"
+                  placeholder="e.g. yasiru01nimsara@gmail.com"
                 />
               </div>
             </div>
@@ -103,30 +109,32 @@ export default function AdminLoginPage() {
               <div className="relative">
                 <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white dark:focus:bg-slate-900 text-sm shadow-sm transition-all"
-                  placeholder="••••••••••••"
+                  className="w-full pl-10 pr-11 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-indigo-600 focus:bg-white dark:focus:bg-slate-900 text-sm shadow-sm transition-all"
+                  placeholder="Enter your password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors p-1"
+                  title={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
               </div>
-            </div>
-
-            {/* Quick Demo Hint */}
-            <div className="p-3.5 rounded-xl bg-indigo-50/80 dark:bg-slate-950/80 border border-indigo-100 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-1.5 text-indigo-700 dark:text-indigo-400 font-semibold mb-1">
-                <KeyRound className="w-3.5 h-3.5" />
-                <span>Admin Credentials Pre-filled:</span>
-              </div>
-              <p className="font-mono text-slate-800 dark:text-slate-300">Email: yasiru01nimsara@gmail.com</p>
-              <p className="font-mono text-slate-800 dark:text-slate-300">Password: Admin@Yasiru2026</p>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 px-4 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-600/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-[1.01]"
+              className="w-full mt-2 py-3.5 px-4 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 shadow-lg shadow-indigo-600/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-[1.01]"
             >
               {loading ? (
                 <span>Authenticating...</span>

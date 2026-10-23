@@ -8,7 +8,7 @@ async function main() {
 
   // 1. Create or update Admin User
   const adminEmail = process.env.ADMIN_EMAIL || 'yasiru01nimsara@gmail.com';
-  const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@Yasiru2026';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'Yazi_boy021224';
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
   await prisma.user.upsert({
