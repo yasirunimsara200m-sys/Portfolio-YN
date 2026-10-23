@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export function getAuthToken(): string | null {
   if (typeof window !== 'undefined') {
@@ -30,7 +30,17 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const url = `${API_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  // Ensure clean path resolution whether API_URL is absolute ('https://...') or relative ('/api')
+  let cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  let url: string;
+
+  if (API_URL.startsWith('http://') || API_URL.startsWith('https://')) {
+    url = `${API_URL.replace(/\/$/, '')}${cleanEndpoint}`;
+  } else {
+    // Relative route for direct Vercel Serverless API execution
+    const base = API_URL.replace(/\/$/, '');
+    url = cleanEndpoint.startsWith(base) ? cleanEndpoint : `${base}${cleanEndpoint}`;
+  }
 
   try {
     const res = await fetch(url, {
@@ -45,7 +55,7 @@ export async function fetchApi(endpoint: string, options: RequestInit = {}) {
 
     return await res.json();
   } catch (error: any) {
-    console.error(`API Error on ${endpoint}:`, error);
+    console.warn(`API call notice on ${endpoint}:`, error.message || error);
     throw error;
   }
 }
