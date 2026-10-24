@@ -8,6 +8,16 @@ export const metadata: Metadata = {
   description: 'Portfolio of T. K. Yasiru Nimsara - Full Stack Software Engineer specializing in React, Next.js, Django, Nest.js, and modern cloud technologies.',
   keywords: ['Yasiru Nimsara', 'Software Engineer', 'Full Stack Developer', 'React', 'Next.js', 'Nest.js', 'Django', 'Sri Lanka'],
   authors: [{ name: 'Yasiru Nimsara' }],
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'Yasiru Nimsara | Full Stack Software Engineer',
     description: 'Explore the full-stack web applications, tech expertise, and engineering projects of Yasiru Nimsara.',
