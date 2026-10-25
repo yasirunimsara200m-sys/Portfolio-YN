@@ -45,7 +45,7 @@ export default function HeroSection({ profile }: HeroSectionProps) {
   ];
 
   return (
-    <section className="relative pt-28 sm:pt-36 lg:pt-44 pb-16 sm:pb-24 lg:pb-32 overflow-hidden w-full">
+    <section className="relative pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-24 lg:pb-32 overflow-hidden w-full">
       {/* Animated Interactive Particle Background */}
       <HeroBackgroundAnimation />
 
