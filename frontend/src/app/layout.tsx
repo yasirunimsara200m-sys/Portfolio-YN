@@ -3,7 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '../context/ThemeContext';
 import CursorGlow from '../components/CursorGlow';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yasirunimsara.vercel.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yasirunimsara-yn.vercel.app';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
