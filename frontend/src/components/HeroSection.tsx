@@ -2,7 +2,13 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import HeroBackgroundAnimation from './HeroBackgroundAnimation';
+
+const GlobeBackground = dynamic(() => import('./GlobeBackground'), {
+  ssr: false,
+  loading: () => null,
+});
 import {
   Github,
   Linkedin,
@@ -162,9 +168,14 @@ export default function HeroSection({ profile }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Right Column: Visual Portrait Card with Photo Selector */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative mt-6 lg:mt-0">
-            <div className="relative w-full max-w-[340px] xs:max-w-[380px] sm:max-w-[420px] aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-slate-200/90 via-slate-100 to-white dark:from-slate-800/80 dark:via-slate-900/90 dark:to-slate-950 border border-slate-300 dark:border-slate-700/60 shadow-2xl">
+          {/* Right Column: Visual Portrait Card with Photo Selector & 3D Globe Background */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative mt-10 lg:mt-0">
+            {/* 3D Interactive Globe Container directly behind photo */}
+            <div className="absolute -inset-16 sm:-inset-24 lg:-inset-32 flex items-center justify-center pointer-events-auto z-0 opacity-80 dark:opacity-90">
+              <GlobeBackground />
+            </div>
+
+            <div className="relative z-10 w-full max-w-[340px] xs:max-w-[380px] sm:max-w-[420px] aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-slate-200/90 via-slate-100 to-white dark:from-slate-800/80 dark:via-slate-900/90 dark:to-slate-950 border border-slate-300 dark:border-slate-700/60 shadow-2xl backdrop-blur-sm">
               {/* Outer Glow Ring */}
               <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-indigo-500 via-purple-600 to-cyan-500 opacity-20 dark:opacity-25 blur-2xl animate-pulse-slow"></div>
 
