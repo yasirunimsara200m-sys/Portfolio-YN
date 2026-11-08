@@ -54,36 +54,46 @@ export default function ContactSection({
 
     try {
       // 1. Send real email notification to your Gmail via EmailJS
-      const emailPromise = emailjs.send(
-        'service_97v797s',
-        'template_jii8jwq',
-        {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject || 'Portfolio Inquiry',
-          message: formData.message,
-          reply_to: formData.email,
-        },
-        'GyKTIiVHNDkQA8VaG'
-      );
+      let emailSuccess = false;
+      try {
+        const res = await emailjs.send(
+          'service_97v797s',
+          'template_jii8jwq',
+          {
+            name: formData.name,
+            from_name: formData.name,
+            email: formData.email,
+            from_email: formData.email,
+            subject: formData.subject || 'Portfolio Inquiry',
+            message: formData.message,
+            reply_to: formData.email,
+          },
+          'GyKTIiVHNDkQA8VaG'
+        );
+        if (res.status === 200) {
+          emailSuccess = true;
+        }
+      } catch (e: any) {
+        console.error('EmailJS sending error details:', e);
+      }
 
       // 2. Also save into Neon PostgreSQL DB for Admin Dashboard records
-      const dbPromise = fetchApi('/messages', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-      });
-
-      // Execute both in parallel
-      await Promise.allSettled([emailPromise, dbPromise]);
+      try {
+        await fetchApi('/messages', {
+          method: 'POST',
+          body: JSON.stringify(formData),
+        });
+      } catch (dbErr) {
+        console.error('DB save error:', dbErr);
+      }
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 6000);
     } catch (err: any) {
-      console.warn('Submission notice:', err);
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 6000);
+      console.error('Submission error:', err);
+      setStatus('error');
+      setErrorMessage('Could not send message. Please try reaching out via direct email.');
     }
   };
 
