@@ -61,20 +61,20 @@ export default function ContactSection({
           'template_jii8jwq',
           {
             name: formData.name,
-            from_name: formData.name,
             email: formData.email,
-            from_email: formData.email,
             subject: formData.subject || 'Portfolio Inquiry',
+            title: formData.subject || 'Portfolio Inquiry',
             message: formData.message,
-            reply_to: formData.email,
+            time: new Date().toLocaleString(),
           },
           'GyKTIiVHNDkQA8VaG'
         );
+        console.log('EmailJS response:', res);
         if (res.status === 200) {
           emailSuccess = true;
         }
       } catch (e: any) {
-        console.error('EmailJS sending error details:', e);
+        console.error('EmailJS error:', e);
       }
 
       // 2. Also save into Neon PostgreSQL DB for Admin Dashboard records
