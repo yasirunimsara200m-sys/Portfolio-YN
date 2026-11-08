@@ -14,6 +14,7 @@ import {
   Github,
 } from 'lucide-react';
 import { fetchApi } from '../lib/api';
+import emailjs from '@emailjs/browser';
 
 interface ContactSectionProps {
   email: string;
@@ -52,16 +53,34 @@ export default function ContactSection({
     setErrorMessage('');
 
     try {
-      await fetchApi('/messages', {
+      // 1. Send real email notification to your Gmail via EmailJS
+      const emailPromise = emailjs.send(
+        'service_97v797s',
+        'template_jii8jwq',
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject || 'Portfolio Inquiry',
+          message: formData.message,
+          reply_to: formData.email,
+        },
+        'GyKTIiVHNDkQA8VaG'
+      );
+
+      // 2. Also save into Neon PostgreSQL DB for Admin Dashboard records
+      const dbPromise = fetchApi('/messages', {
         method: 'POST',
         body: JSON.stringify(formData),
       });
+
+      // Execute both in parallel
+      await Promise.allSettled([emailPromise, dbPromise]);
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 6000);
     } catch (err: any) {
-      console.warn('Backend message acknowledged locally:', err);
+      console.warn('Submission notice:', err);
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 6000);
