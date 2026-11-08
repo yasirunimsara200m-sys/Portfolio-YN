@@ -39,16 +39,13 @@ export default function ExperienceSection({ experiences }: ExperienceSectionProp
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800/40 text-purple-700 dark:text-purple-300 text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
             <Briefcase className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span>Career Milestones</span>
+            <span>Experience</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Work{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 dark:from-purple-400 dark:via-indigo-400 dark:to-cyan-300">
-              Experience
-            </span>
+            Work Experience
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-            Hands-on professional engineering experience across digital platforms, full-stack systems, and national organizations.
+            Hands-on software development, systems maintenance, and operational roles I have contributed to.
           </p>
         </div>
 

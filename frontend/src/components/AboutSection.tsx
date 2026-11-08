@@ -53,17 +53,13 @@ export default function AboutSection({ aboutText }: AboutSectionProps) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800/40 text-indigo-700 dark:text-indigo-300 text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
-            <Zap className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             <span>About Me</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Engineering High-Performance{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-indigo-400 dark:to-cyan-300">
-              Web Ecosystems
-            </span>
+            Building reliable web applications from idea to production.
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
-            From frontend user experiences to scalable backend APIs and cloud monitoring, I build dependable digital products.
+            I enjoy creating clean, responsive frontends, designing straightforward backend APIs, and making sure websites run smoothly.
           </p>
         </div>
 
@@ -74,7 +70,7 @@ export default function AboutSection({ aboutText }: AboutSectionProps) {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span>Undergraduate Software Engineer &amp; Full-Stack Practitioner</span>
+                <span>Who I Am &amp; What I Do</span>
               </h3>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
                 {aboutText}

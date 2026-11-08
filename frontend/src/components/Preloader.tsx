@@ -13,17 +13,16 @@ interface PreloaderProps {
 export default function Preloader({ onComplete, variant = 'logo' }: PreloaderProps) {
   const { theme } = useTheme();
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState('Initializing Portfolio System...');
+  const [statusText, setStatusText] = useState('Loading...');
   const [isDone, setIsDone] = useState(false);
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const statuses = [
-      { at: 15, text: 'Connecting to Cloud PostgreSQL...' },
-      { at: 40, text: 'Synchronizing Full-Stack Projects...' },
-      { at: 70, text: 'Loading Technical Skills & Stack...' },
-      { at: 90, text: 'Optimizing Neural UI Experience...' },
-      { at: 100, text: 'Welcome, Yasiru Nimsara' },
+      { at: 20, text: 'Getting things ready...' },
+      { at: 50, text: 'Loading projects & experience...' },
+      { at: 80, text: 'Almost there...' },
+      { at: 100, text: 'Welcome!' },
     ];
 
     const timer = setInterval(() => {

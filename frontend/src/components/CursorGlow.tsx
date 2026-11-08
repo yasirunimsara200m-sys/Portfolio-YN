@@ -71,39 +71,34 @@ export default function CursorGlow() {
 
   return (
     <div className="hidden md:block pointer-events-none fixed inset-0 z-50 overflow-hidden">
-      {/* Outer Glowing Trailing Orb */}
+      {/* Outer Subtle Ambient Ring */}
       <div
-        className="fixed top-0 left-0 rounded-full transition-transform duration-75 ease-out pointer-events-none"
+        className="fixed top-0 left-0 rounded-full transition-transform duration-100 ease-out pointer-events-none"
         style={{
           transform: `translate3d(${trailingPos.x}px, ${trailingPos.y}px, 0) translate(-50%, -50%) scale(${
-            isHovering ? 1.8 : 1
+            isHovering ? 1.5 : 1
           })`,
-          width: '42px',
-          height: '42px',
+          width: '32px',
+          height: '32px',
           background: isHovering
-            ? 'radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(6, 182, 212, 0.15) 70%, transparent 100%)'
-            : 'radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(6, 182, 212, 0.1) 60%, transparent 100%)',
+            ? 'rgba(99, 102, 241, 0.12)'
+            : 'rgba(99, 102, 241, 0.05)',
           border: isHovering
-            ? '1.5px solid rgba(99, 102, 241, 0.6)'
-            : '1px solid rgba(99, 102, 241, 0.3)',
-          boxShadow: isHovering
-            ? '0 0 25px rgba(99, 102, 241, 0.5), inset 0 0 15px rgba(6, 182, 212, 0.3)'
-            : '0 0 15px rgba(99, 102, 241, 0.3)',
-          backdropFilter: 'blur(1px)',
+            ? '1px solid rgba(99, 102, 241, 0.4)'
+            : '1px solid rgba(99, 102, 241, 0.18)',
         }}
       />
 
-      {/* Inner Precision Neon Core Dot */}
+      {/* Inner Clean Dot */}
       <div
         className="fixed top-0 left-0 rounded-full pointer-events-none transition-transform duration-0"
         style={{
           transform: `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%) scale(${
-            isHovering ? 1.4 : 1
+            isHovering ? 1.2 : 1
           })`,
-          width: '8px',
-          height: '8px',
-          backgroundColor: isHovering ? '#38bdf8' : '#818cf8',
-          boxShadow: '0 0 10px #6366f1, 0 0 20px #06b6d4',
+          width: '5px',
+          height: '5px',
+          backgroundColor: '#6366f1',
         }}
       />
     </div>

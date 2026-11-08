@@ -22,8 +22,8 @@ export default function HeroBackgroundAnimation() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Particle network
-    const particleCount = Math.min(Math.floor(width / 35), 45);
+    // Elegant, subtle ambient dust/stars (humanized, not dense tech web)
+    const particleCount = Math.min(Math.floor(width / 60), 22);
     const particles: Array<{
       x: number;
       y: number;
@@ -34,43 +34,24 @@ export default function HeroBackgroundAnimation() {
       alpha: number;
     }> = [];
 
-    const colors = ['#6366f1', '#06b6d4', '#a855f7', '#3b82f6'];
+    const colors = ['#6366f1', '#06b6d4', '#818cf8'];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        radius: Math.random() * 1.5 + 0.8,
         color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.5 + 0.2,
+        alpha: Math.random() * 0.35 + 0.15,
       });
     }
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Connect near particles with delicate glowing lines
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 130) {
-            const lineAlpha = (1 - dist / 130) * 0.15;
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(99, 102, 241, ${lineAlpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Update & draw particles
+      // Subtle float particles without harsh spiderweb lines
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
@@ -84,11 +65,8 @@ export default function HeroBackgroundAnimation() {
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.globalAlpha = 1.0;
-        ctx.shadowBlur = 0;
       }
 
       animationFrameId = requestAnimationFrame(render);

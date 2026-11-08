@@ -5,7 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import HeroBackgroundAnimation from './HeroBackgroundAnimation';
 
-const GlobeBackground = dynamic(() => import('./GlobeBackground'), {
+const SuriaOrbAnimation = dynamic(() => import('./SuriaOrbAnimation'), {
   ssr: false,
   loading: () => null,
 });
@@ -168,11 +168,11 @@ export default function HeroSection({ profile }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* Right Column: Visual Portrait Card with Photo Selector & 3D Globe Background */}
+          {/* Right Column: Visual Portrait Card with Photo Selector & Ysuriadesign Orb Animation */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center relative mt-10 lg:mt-0">
-            {/* 3D Interactive Globe Container directly behind photo */}
-            <div className="absolute -inset-16 sm:-inset-24 lg:-inset-32 flex items-center justify-center pointer-events-auto z-0 opacity-80 dark:opacity-90">
-              <GlobeBackground />
+            {/* Organic 3D Fluid Shader Orb (Ysuriadesign style) directly behind portrait */}
+            <div className="absolute -inset-16 sm:-inset-24 lg:-inset-32 flex items-center justify-center pointer-events-auto z-0 opacity-85 dark:opacity-95">
+              <SuriaOrbAnimation />
             </div>
 
             <div className="relative z-10 w-full max-w-[340px] xs:max-w-[380px] sm:max-w-[420px] aspect-[4/5] rounded-3xl p-3 bg-gradient-to-b from-slate-200/90 via-slate-100 to-white dark:from-slate-800/80 dark:via-slate-900/90 dark:to-slate-950 border border-slate-300 dark:border-slate-700/60 shadow-2xl backdrop-blur-sm">

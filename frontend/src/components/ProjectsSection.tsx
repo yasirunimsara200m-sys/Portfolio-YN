@@ -54,16 +54,13 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/40 text-emerald-700 dark:text-emerald-300 text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
             <FolderGit2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            <span>Portfolio Showcase</span>
+            <span>Projects</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Featured{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-cyan-600 to-indigo-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-indigo-400">
-              Projects
-            </span>
+            Featured Projects
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-            A curated selection of full-stack platforms, institutional portals, and management systems built with clean code and modern frameworks.
+            Real-world full-stack web platforms, portals, and systems I have designed and developed.
           </p>
         </div>
 
